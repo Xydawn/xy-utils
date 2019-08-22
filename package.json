@@ -1,6 +1,6 @@
 {
-  "name": "xy-utils",
-  "version": "0.0.1",
+  "name": "xydawn-utils",
+  "version": "0.0.4",
   "description": "js常用组件",
   "main": "index.js",
   "scripts": {
