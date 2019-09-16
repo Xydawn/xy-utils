@@ -23,7 +23,7 @@ Array.prototype.toTree = function(sid = 'id', spid = 'pid') {
 Array.prototype.foEachTree = function(callBack, children = 'children') {
   this.forEach((v) => {
     if (v[children]) {
-      this.foEachTree(v[children], callBack)
+      v[children].foEachTree(callBack, children)
     }
     callBack(v)
   })
@@ -37,7 +37,7 @@ Array.prototype.forEachTreeGetAllById = function(value, callBack, id = 'id', pid
     if (v[id] === value) {
       callBack(v)
       if (v[pid]) {
-        this.forEachTreeGetAllById(v[pid], callBack)
+        this.forEachTreeGetAllById(v[pid], callBack，id, pid)
       }
     }
   })
