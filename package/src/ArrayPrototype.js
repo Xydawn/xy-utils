@@ -37,7 +37,7 @@ Array.prototype.forEachTreeGetAllById = function(value, callBack, id = 'id', pid
     if (v[id] === value) {
       callBack(v)
       if (v[pid]) {
-        this.forEachTreeGetAllById(v[pid], callBack，id, pid)
+        this.forEachTreeGetAllById(v[pid], callBack, id, pid)
       }
     }
   })
