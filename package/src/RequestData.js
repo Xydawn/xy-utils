@@ -7,10 +7,14 @@ export default class RequestData extends Object {
   }
 
   setData(obj) {
-
+    this.data = obj
     for (let key in obj) {
       this[key] = obj[key]
     }
+  }
+
+  getData() {
+    return this.data
   }
 
   reload() {
@@ -24,5 +28,6 @@ export default class RequestData extends Object {
     }
     return rules
   }
+
 
 }
