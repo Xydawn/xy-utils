@@ -6,23 +6,22 @@ Date.prototype.formatDate = function(value) {
   return crtTime.dateFtt('yyyy-MM-dd HH:mm:ss')
 }
 
-Date.prototype.dateFtt = function(date) {
+Date.prototype.dateFtt = function(fmt) {
   var o = {
-    'M+': date.getMonth() + 1,
-    'd+': date.getDate(),
-    'H+': date.getHours(),
-    'm+': date.getMinutes(),
-    's+': date.getSeconds(),
-    'q+': Math.floor((date.getMonth() + 3) / 3),
-    'S': date.getMilliseconds()
+    'M+': this.getMonth() + 1,
+    'd+': this.getDate(),
+    'H+': this.getHours(),
+    'm+': this.getMinutes(),
+    's+': this.getSeconds(),
+    'q+': Math.floor((this.getMonth() + 3) / 3),
+    'S': this.getMilliseconds()
   }
-  let fmt
-  if (/(y+)/.test(this)) {
-    fmt = this.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
   }
   for (let k in o) {
     if (new RegExp('(' + k + ')').test(fmt)) {
-      fmt = this.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
     }
   }
   return fmt
