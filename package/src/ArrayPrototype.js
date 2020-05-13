@@ -42,3 +42,25 @@ Array.prototype.forEachTreeGetAllById = function(value, callBack, id = 'id', pid
     }
   })
 }
+/*
+ * 移除某个元素
+ */
+Array.prototype.removeObject = function(value){
+
+	for (var i = 0; i < this.length; i++) {
+		let v = this[i]
+		if(value instanceof Object){
+			if(v == value){
+				this.remove(i)
+				break
+			}
+		}	
+	}
+	
+}
+/*
+ * 通过index移除某个元素
+ */
+Array.prototype.remove = function(index){
+	this.splice(index, 1)
+}
