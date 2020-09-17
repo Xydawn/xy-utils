@@ -1,28 +1,32 @@
-Date.prototype.formatDate = function(value) {
-  if (value == null || value == 0) {
-    return ''
-  }
-  var crtTime = new Date(value)
-  return crtTime.dateFtt('yyyy-MM-dd HH:mm:ss')
-}
-
-Date.prototype.dateFtt = function(fmt) {
-  var o = {
-    'M+': this.getMonth() + 1,
-    'd+': this.getDate(),
-    'H+': this.getHours(),
-    'm+': this.getMinutes(),
-    's+': this.getSeconds(),
-    'q+': Math.floor((this.getMonth() + 3) / 3),
-    'S': this.getMilliseconds()
-  }
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
-  }
-  for (let k in o) {
-    if (new RegExp('(' + k + ')').test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+Object.defineProperty(Array.prototype, 'formatDate', {
+  value: function (value) {
+    if (value == null || value == 0) {
+      return ''
     }
+    var crtTime = new Date(value)
+    return crtTime.dateFtt('yyyy-MM-dd HH:mm:ss')
   }
-  return fmt
-}
+})
+
+Object.defineProperty(Array.prototype, 'dateFtt', {
+  value: function (fmt) {
+    var o = {
+      'M+': this.getMonth() + 1,
+      'd+': this.getDate(),
+      'H+': this.getHours(),
+      'm+': this.getMinutes(),
+      's+': this.getSeconds(),
+      'q+': Math.floor((this.getMonth() + 3) / 3),
+      'S': this.getMilliseconds()
+    }
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
+    }
+    for (let k in o) {
+      if (new RegExp('(' + k + ')').test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+      }
+    }
+    return fmt
+  }
+})

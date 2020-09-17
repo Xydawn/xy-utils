@@ -1,7 +1,7 @@
 import './package/src/ArrayPrototype'
 import './package/src/DatePrototype'
 
-const install = function(Vue) {
+const install = function (Vue) {
 
 }
 /* istanbul ignore if */
@@ -10,4 +10,3 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default { install }
-
