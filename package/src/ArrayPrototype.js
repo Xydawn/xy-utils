@@ -1,15 +1,13 @@
+/* eslint-disable no-extend-native */
 Object.defineProperty(Array.prototype, 'toTree', {
-  value: function (sid = 'id', spid = 'pid') {
-    this.forEach((item) => {
-      delete item.children
-    })
+  value: function (config = { id: 'id', parentId: 'parentId' }) {
     let map = {}
     this.forEach((item) => {
-      map[item[sid]] = item
+      map[item[config.id]] = item
     })
     let val = []
     this.forEach((item) => {
-      let parent = map[item[spid]]
+      let parent = map[item[config.parentId]]
       if (parent) {
         (parent.children || (parent.children = [])).push(item)
       } else {
@@ -20,14 +18,15 @@ Object.defineProperty(Array.prototype, 'toTree', {
   }
 })
 
+
 /*
 * 遍历Tree结构所有内容
 * */
-Object.defineProperty(Array.prototype, 'foEachTree', {
+Object.defineProperty(Array.prototype, 'forEachTree', {
   value: function (callBack, children = 'children') {
     this.forEach((v) => {
       if (v[children]) {
-        v[children].foEachTree(callBack, children)
+        v[children].forEachTree(callBack, children)
       }
       callBack(v)
     })
@@ -38,12 +37,12 @@ Object.defineProperty(Array.prototype, 'foEachTree', {
 * Tree结构倒序遍历，通过子类id返回所有父类id
 * */
 Object.defineProperty(Array.prototype, 'forEachTreeGetAllById', {
-  value: function (value, callBack, id = 'id', pid = 'pid') {
+  value: function (value, callBack, id = 'id', parentId = 'parentId') {
     this.foEachTree(v => {
       if (v[id] === value) {
         callBack(v)
-        if (v[pid]) {
-          this.forEachTreeGetAllById(v[pid], callBack, id, pid)
+        if (v[parentId]) {
+          this.forEachTreeGetAllById(v[parentId], callBack, id, parentId)
         }
       }
     })
@@ -57,7 +56,7 @@ Object.defineProperty(Array.prototype, 'forEachTreeGetAllById', {
 Object.defineProperty(Array.prototype, 'removeObject', {
   value: function (value) {
     for (var i = 0; i < this.length; i++) {
-      let v = this[i]
+      const v = this[i]
       if (value instanceof Object) {
         if (v == value) {
           this.remove(i)
@@ -65,7 +64,6 @@ Object.defineProperty(Array.prototype, 'removeObject', {
         }
       }
     }
-
   }
 })
 /*
